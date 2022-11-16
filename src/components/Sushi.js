@@ -2,14 +2,14 @@ import React from "react";
 
 function Sushi( {sushi, onEatSushi }) {
   //destructure our prop:
-  const {name, img_url, price, id, eaten} = sushi
+  const {name, img_url, price, eaten} = sushi
 
   // console.log({sushi})
- 
+  
 
   return (
     <div className="sushi">
-      <div className="plate" onClick={() => onEatSushi(id)}>
+      <div className="plate" onClick={() => onEatSushi(sushi)}>
         {/* Tell me if this sushi has been eaten! */}
         {eaten ? null : (
           <img

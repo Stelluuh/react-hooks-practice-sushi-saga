@@ -7,6 +7,7 @@ const API = "http://localhost:3001/sushis";
 
 function App() {
   const [sushis, setSushis] = useState([])
+  const [wallet, setWallet] = useState(100);
   
 
   useEffect(() => {
@@ -17,10 +18,17 @@ function App() {
 
   // console.log(sushis)
   
-  function eatSushi (id) {
+  function eatSushi (eatenSushi) {
     
-    setSushis(sushis.map(sushi => sushi.id === id ? {...sushi, eaten: true} : sushi)
-  )}
+    const moneyLeft = wallet - eatenSushi.price
+
+    if (moneyLeft >= 0) {
+
+      setWallet(moneyLeft) 
+      
+      setSushis(sushis.map(sushi => sushi.id === eatenSushi.id ? {...sushi, eaten: true} : sushi)
+      )}
+    }
 
     const emptySushiPlate = sushis.filter(sushi => sushi.eaten)
 
@@ -31,7 +39,8 @@ function App() {
         onEatSushi={eatSushi}
       />
       <Table 
-        plates = {emptySushiPlate} 
+        plates = {emptySushiPlate}
+        wallet = {wallet} 
       />
     </div>
   );
