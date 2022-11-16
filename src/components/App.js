@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SushiContainer from "./SushiContainer";
 import Table from "./Table";
 
+
 const API = "http://localhost:3001/sushis";
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
       .then(data => setSushis(data)) //this then() method is receiving the object that we returned from the first call to then() (our parsed JSON object). We capture the object in the paramater data and pass it into another CB function to manipulate the DOM.
   }, []) // adding [] will only run the fetch once.
 
-  console.log(sushis)
+  // console.log(sushis)
 
 
   return (
