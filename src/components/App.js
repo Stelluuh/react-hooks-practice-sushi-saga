@@ -10,17 +10,25 @@ function App() {
 
   useEffect(() => {
     fetch(API)
-    //fetch takes in a URL as its argument and makes an HTTP request/network request and returns a promise object that represents the data source sent back.
-      .then(response => response.json()) //.then is called on the promise object returned. It takes a callback function. This CB function uses json() method to convert the promise object into plain text in order to use in the next .then(). in return we also get a Promise.
-      .then(data => setSushis(data)) //this then() method is receiving the object that we returned from the first call to then() (our parsed JSON object). We capture the object in the paramater data and pass it into another CB function to manipulate the DOM.
-  }, []) // adding [] will only run the fetch once.
+      .then(response => response.json()) 
+      .then(data => setSushis(data)) 
+  }, []) 
 
   // console.log(sushis)
 
 
+
+  function eatSushi (id) {
+    //we want to manipulate each sushi so we need to use map and give us a new array with the changed data. in the map, we want to say: does the sushi id that we are looking at match the id we are passing in? if it does we want to return that new piece of sushi. And we are going to use the spread operator on sushi and set eaten to true. If the id matches, we are going to create a new one, we are going to spread the old sushi data to it and add eaten and set it to true:
+    setSushis(sushis.map(sushi => sushi.id === id ? {...sushi, eaten: true} : sushi)
+  )}
+
   return (
     <div className="app">
-      <SushiContainer sushis={sushis}/>
+      <SushiContainer 
+        sushis={sushis}
+        onEatSushi={eatSushi}
+      />
       <Table />
     </div>
   );

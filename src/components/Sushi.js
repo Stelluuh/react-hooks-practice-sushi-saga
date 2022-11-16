@@ -1,17 +1,17 @@
 import React from "react";
 
-function Sushi( {sushi }) {
-
+function Sushi( {sushi, onEatSushi }) {
   //destructure our prop:
-  const {name, img_url, price} = sushi
+  const {name, img_url, price, id, eaten} = sushi
 
   // console.log({sushi})
+ 
 
   return (
     <div className="sushi">
-      <div className="plate" onClick={/* Give me a callback! */ null}>
+      <div className="plate" onClick={() => onEatSushi(id)}>
         {/* Tell me if this sushi has been eaten! */}
-        {false ? null : (
+        {eaten ? null : (
           <img
             src={img_url}
             alt={name}
